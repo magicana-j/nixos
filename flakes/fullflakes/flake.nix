@@ -23,7 +23,7 @@
   inputs.nixpkgsGitHub.url = "github:NixOS/nixpkgs";
 
   # The nixos-20.09 branch of the NixOS/nixpkgs repository on GitHub.
-  inputs.nixpkgsGitHubBranch.url = "github:NixOS/nixpkgs/nixos-23.11";
+  inputs.nixpkgsGitHubBranch.url = "github:NixOS/nixpkgs/nixos-24.05";
 
   # A specific revision of the NixOS/nixpkgs repository on GitHub.
   inputs.nixpkgsGitHubRevision.url = "github:NixOS/nixpkgs/a3a3dda3bacf61e8a39258a0ed9c924eeca8e293";
