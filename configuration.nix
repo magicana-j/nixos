@@ -14,33 +14,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  #boot.kernelParams = [ "i915.force_probe=<5916>" ];
-  nixpkgs.config.packageOverrides = pkgs: {
-    intel-vaapi-driver = pkgs.intel-vaapi-driver.override {
-      enableHybridCodec = true;
-    };
-    steam = pkgs.steam.override {
-      extraPkgs = pkgs:
-        with pkgs; [
-          migu
-        ];
-    };
-  };
-
-  hardware.opengl = {
-    enable = true;
-    extraPackages = with pkgs; [
-      intel-media-driver
-      intel-vaapi-driver
-      libvdpau-va-gl
-    ];
-  };
-  environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "iHD";
-  };
-
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "pixy"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -68,15 +44,14 @@
   };
 
   # Enable the X11 windowing system.
+  # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
 
-  # Enable the Pantheon Desktop Environment.
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.desktopManager.cinnamon.enable = true;
-  # services.xserver.desktopManager.pantheon.enable = true;
+  # Enable the KDE Plasma Desktop Environment.
+  services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
-  # services.xserver = {
   services.xserver.xkb = {
     layout = "jp";
     variant = "";
@@ -110,73 +85,18 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.junin = {
     isNormalUser = true;
-    description = "Junin Nakajiman";
-    extraGroups = [ "networkmanager" "wheel" "libvirt" "docker"];
+    description = "Junin";
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "libvirt"
+    ];
     packages = with pkgs; [
+      kdePackages.kate
     #  thunderbird
     ];
   };
 
-  # Install firefox.
-  programs.firefox.enable = true;
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget curl
-    git
-    #gcc go python312
-    #discord
-    #remmina
-    #slack
-    #vscode
-    #easyeffects
-    docker-compose
-    blueman
-
-  ];
-
-
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-  };
-
-  programs.starship = {
-    enable = true;
-  };
-
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
 
   nix = {
     settings = {
@@ -192,25 +112,19 @@
 
   };
 
-  services.tailscale.enable = true;
-  networking.firewall = {
-    enable = true;
-    trustedInterfaces = ["tailscale0"];
-    allowedUDPPorts = [];
-  };
-
   i18n.inputMethod = {
     enabled = "fcitx5";
     fcitx5.addons = [pkgs.fcitx5-mozc];
   };
 
+
   fonts = {
-#    fonts = with pkgs; [
     packages= with pkgs; [
       noto-fonts-cjk-serif
       noto-fonts-cjk-sans
       noto-fonts-emoji
       nerdfonts
+      fira-code
     ];
 
     fontDir.enable = true;
@@ -224,18 +138,37 @@
     };
   };
 
-  virtualisation = {
-    docker = {
-      enable = true;
-      rootless = {
-        enable = true;
-        setSocketVariable = true;
-      };
-    };
-    libvirtd = {
-      enable = true;
+
+  nixpkgs.config.packageOverrides = pkgs: {
+    steam = pkgs.steam.override {
+      extraPkgs = pkgs:
+        with pkgs; [
+          migu
+        ];
     };
   };
+
+
+  virtualisation.podman = {
+    enable = true;
+    #networkSocket.enable = true;
+  };
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      runAsRoot = true;
+      swtpm.enable = true;
+      ovmf = {
+        enable = true;
+        packages = [(pkgs.OVMF.override {
+          secureBoot = true;
+          tpmSupport = true;
+        }).fd];
+      };
+    };
+  };
+
 
   programs.virt-manager = {
     enable = true;
@@ -246,23 +179,86 @@
     powerOnBoot = true;
   };
 
-  #services.blueman.ebnable = true;
-  
-  services.flatpak.enable = true;
-  xdg.portal.enable = true;
+
+
+  # Install firefox.
+  programs.firefox.enable = true;
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
+    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    wget curl git neovim neofetch p7zip
+    zed-editor 
+    gcc go python3 jdk
+    scala
+    clojure sbcl chicken gauche guile # Lisp / Scheme
+    swiProlog #swiPrologWithGui # Prolog
+    vscode
+    easyeffects
+    isoimagewriter
+    #blueman
+    # Pentesting tool
+    john johnny lynis metasploit nikto nmap wpscan social-engineer-toolkit
+    burpsuite wireshark thc-hydra sqlmap apktool ffuf bettercap
+
+  ];
+
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
+  # programs.mtr.enable = true;
+  # programs.gnupg.agent = {
+  #   enable = true;
+  #   enableSSHSupport = true;
+  # };
 
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
   };
-#  nixpkgs.config.packageOverrides = pkgs: {
-#    steam = pkgs.steam.override {
-#      extraPkgs = pkgs:
-#        with pkgs; [
-#          migu
-#        ];
-#    };
-#  };
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
+  programs.starship = {
+    enable = true;
+  };
+
+  # List services that you want to enable:
+
+  # Enable the OpenSSH daemon.
+  # services.openssh.enable = true;
+
+  # Open ports in the firewall.
+  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedUDPPorts = [ ... ];
+  # Or disable the firewall altogether.
+  # networking.firewall.enable = false;
+
+
+  services.flatpak.enable = true;
+  xdg.portal.enable = true;
+
+  services.tailscale.enable = true;
+  networking.firewall = {
+    enable = true;
+    trustedInterfaces = ["tailscale0"];
+    allowedUDPPorts = [];
+  };
+
+
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "24.05"; # Did you read the comment?
 
 }
