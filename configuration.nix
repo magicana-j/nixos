@@ -90,6 +90,7 @@
       "networkmanager"
       "wheel"
       "libvirt"
+      "vboxusers"
     ];
     packages = with pkgs; [
       kdePackages.kate
@@ -120,9 +121,14 @@
 
   fonts = {
     packages= with pkgs; [
-      noto-fonts-cjk-serif
-      noto-fonts-cjk-sans
+#      noto-fonts-cjk-serif
+#      noto-fonts-cjk-sans
       noto-fonts-emoji
+      takao
+      ipafont
+      ipaexfont
+      source-code-pro
+      source-han-code-jp
       nerdfonts
       fira-code
     ];
@@ -130,9 +136,9 @@
     fontDir.enable = true;
     fontconfig = {
       defaultFonts = {
-        serif = ["Noto Serif CJK JP" "Noto Color Emoji"];
-        sansSerif = ["Noto Sans CJK JP" "Noto Color Emoji"];
-        monospace = ["JetBrainsMono Nerd Font" "Noto Color Emoji"];
+        serif = ["Takao P Mincho" "Noto Color Emoji"];
+        sansSerif = ["Takao P Gothic" "Noto Color Emoji"];
+        monospace = ["Source Code Pro" "Noto Color Emoji"];
         emoji = ["Noto Color Emoji"];
       };
     };
@@ -168,7 +174,10 @@
       };
     };
   };
-
+  virtualisation.virtualbox.host = {
+    enable = true;
+    enableExtensionPack = true;
+  };
 
   programs.virt-manager = {
     enable = true;
@@ -178,7 +187,6 @@
     enable = true;
     powerOnBoot = true;
   };
-
 
 
   # Install firefox.
@@ -192,18 +200,18 @@
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget curl git neovim neofetch p7zip
-    zed-editor 
-    gcc go python3 jdk
-    scala
-    clojure sbcl chicken gauche guile # Lisp / Scheme
-    swiProlog #swiPrologWithGui # Prolog
-    vscode
+    zed-editor
+#    gcc go python3 jdk
+#    scala
+#    clojure sbcl chicken gauche guile # Lisp / Scheme
+#    swiProlog #swiPrologWithGui # Prolog
+#    vscode
     easyeffects
     isoimagewriter
-    #blueman
+#    blueman
     # Pentesting tool
-    john johnny lynis metasploit nikto nmap wpscan social-engineer-toolkit
-    burpsuite wireshark thc-hydra sqlmap apktool ffuf bettercap
+#    john johnny lynis metasploit nikto nmap wpscan social-engineer-toolkit
+#    burpsuite wireshark thc-hydra sqlmap apktool ffuf bettercap
 
   ];
 
