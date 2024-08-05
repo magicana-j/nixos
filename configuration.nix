@@ -89,8 +89,8 @@
     extraGroups = [
       "networkmanager"
       "wheel"
-      "libvirt"
-      "vboxusers"
+#      "libvirt"
+#      "vboxusers"
     ];
     packages = with pkgs; [
       kdePackages.kate
@@ -159,29 +159,29 @@
     enable = true;
     #networkSocket.enable = true;
   };
-  virtualisation.libvirtd = {
-    enable = true;
-    qemu = {
-      package = pkgs.qemu_kvm;
-      runAsRoot = true;
-      swtpm.enable = true;
-      ovmf = {
-        enable = true;
-        packages = [(pkgs.OVMF.override {
-          secureBoot = true;
-          tpmSupport = true;
-        }).fd];
-      };
-    };
-  };
-  virtualisation.virtualbox.host = {
-    enable = true;
-    enableExtensionPack = true;
-  };
-
-  programs.virt-manager = {
-    enable = true;
-  };
+#  virtualisation.libvirtd = {
+#    enable = true;
+#    qemu = {
+#      package = pkgs.qemu_kvm;
+#      runAsRoot = true;
+#      swtpm.enable = true;
+#      ovmf = {
+#        enable = true;
+#        packages = [(pkgs.OVMF.override {
+#          secureBoot = true;
+#          tpmSupport = true;
+#        }).fd];
+#      };
+#    };
+#  };
+#  virtualisation.virtualbox.host = {
+#    enable = true;
+#    enableExtensionPack = true;
+#  };
+#
+#  programs.virt-manager = {
+#    enable = true;
+#  };
 
   hardware.bluetooth = {
     enable = true;
@@ -200,7 +200,7 @@
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget curl git neovim neofetch p7zip
-    zed-editor
+#    zed-editor
 #    gcc go python3 jdk
 #    scala
 #    clojure sbcl chicken gauche guile # Lisp / Scheme
