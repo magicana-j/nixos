@@ -35,7 +35,7 @@
 #    burpsuite wireshark thc-hydra sqlmap apktool ffuf bettercap
 
     # Hyprland apps
-    alacritty kitty wezterm wori hyprpaper mako hyprshot wlogout swaylock
+    alacritty kitty wezterm wori hyprpaper swww mako hyprshot wlogout swaylock grim slupr wl-copy
 
     (waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
