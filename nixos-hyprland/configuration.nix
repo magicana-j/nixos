@@ -12,7 +12,17 @@
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+#  boot.loader.grub = {
+#    enable = true;
+#    device = "nodev";
+#    efiSupport = true;
+#    useOSProber = true;
+#  };
+
+  boot.loader.efi = {
+    canTouchEfiVariables = true;
+#    efiSysMountPoint = "/boot";
+  };
 
   networking.hostName = "pixy"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -46,14 +56,48 @@
 
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = true;
+  #services.xserver.enable = true;
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowInsecure = true;
+  nixpkgs.config.PermittedInsecurePackages = [
+    "python-2.7.18.6"
+  ];
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
   };
-  services.desktopManager.plasma6.enable = true;
+  #services.desktopManager.plasma6.enable = true;
+
+
+  programs.hyprland = {
+      enable = true;
+      xwayland.enable = true;
+      xwayland.hidpi = true;
+  };
+
+  environment.etc = {
+    "xdg/gtk-3.0" .source = ./gtk-3.0;
+  };
+
+  environment = {
+    variables = {
+      QT_QPA_PLATFORMTHEME = "qt5ct";
+      QT_QPA_PLATFORM = "xcb obs";
+      WLR_NO_HARDWARE_CURSORS = "1";
+      WLR_DRM_NO_MODIFIERS = "1";
+#      NIXOS_OZONE_WL = "1";
+      MOZ_ENABLE_WAYLAND = "1";
+#      XDG_SESSION_TYPE = "wayland";
+    };
+  };
+
+  hardware = {
+      opengl.enable = true;
+  };
 
 
   # Enable CUPS to print documents.
@@ -76,7 +120,7 @@
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.junin = {
@@ -142,6 +186,7 @@
       source-han-code-jp
       nerdfonts
       fira-code
+      font-awesome
     ];
 
     fontDir.enable = true;
@@ -173,7 +218,7 @@
     #networkSocket.enable = true;
   };
 
-virtualisation.libvirtd = {
+  virtualisation.libvirtd = {
     enable = true;
     qemu = {
       package = pkgs.qemu_kvm;
@@ -200,6 +245,10 @@ virtualisation.libvirtd = {
 
   
   # Bluetooth
+  services.blueman.enable = true;
+
+  services.gnome3.gnome-keyring.enable = true;
+
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
@@ -209,29 +258,32 @@ virtualisation.libvirtd = {
   # Install firefox.
   programs.firefox.enable = true;
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget curl git neofetch p7zip
 #    zed-editor
-    gcc go python3 jdk
+    gcc cmake go python311 python311Packages.pip jdk
 #    scala
 #    clojure sbcl chicken gauche guile # Lisp / Scheme
 #    swiProlog #swiPrologWithGui # Prolog
 #    vscode
     easyeffects
     isoimagewriter
-#    blueman
-    # Pentesting tool
-#    john johnny lynis metasploit nikto nmap wpscan social-engineer-toolkit
-#    burpsuite wireshark thc-hydra sqlmap apktool ffuf bettercap
+    blueman
+    simplescreenrecorder
+
+    gnome.gnome-keyring
+    gtk3
+    qt5.qtwayland
+    qt6.qmake
+    qt6.qtwayland
 
     # Hyprland apps
-    alacritty kitty wezterm wofi hyprpaper swww
+    alacritty kitty waybar wezterm wofi hyprpaper swww hyprpicker
+    brightnessctl networkmanagerapplet pavucontrol
+    polkit_gnome
     mako
     hyprshot wlogout swaylock grim wl-clipboard
     (waybar.overrideAttrs (oldAttrs: {
@@ -243,34 +295,11 @@ virtualisation.libvirtd = {
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-    programs.hyprland = {
-        enable = true;
-        xwayland.enable = true;
-    };
-
-    environment.sessionVariables = {
-        WLR_NO_HARDWARE_CURSORS = "1";
-#        NIXOS_OZONE_WL = "1";
-        MOZ_ENABLE_WAYLAND = "1";
-        XDG_SESSION_TYPE = "wayland";
-        WLR_DRM_NO_MODIFIERS = "1";
-    };
-
-    hardware = {
-        opengl.enable = true;
-    };
-
-    programs = {
-        waybar.enable = true;
-        nm-applet.enable = true;
-    };
-
+  programs.mtr.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 
 
   programs.neovim = {
@@ -315,7 +344,7 @@ virtualisation.libvirtd = {
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -323,10 +352,11 @@ virtualisation.libvirtd = {
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-
   services.flatpak.enable = true;
-  xdg.portal.enable = true;
 
+  services.dbus.enable = true;
+
+  xdg.portal.enable = true;
 # for Hyprland
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
