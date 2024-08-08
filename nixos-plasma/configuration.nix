@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./users.nix
     ];
 
   # Bootloader.
@@ -78,23 +79,6 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.junin = {
-    isNormalUser = true;
-    description = "Junin";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-      "libvirt"
-      "vboxusers"
-    ];
-    packages = with pkgs; [
-      kdePackages.kate
-    #  thunderbird
-    ];
-    shell = pkgs.zsh;
-  };
-
-  programs.zsh.enable = true;
 
   nix = {
     settings = {
