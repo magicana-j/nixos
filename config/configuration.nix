@@ -24,39 +24,39 @@
             ./virtualisation.nix
         ];
 
-	  # Define a user account. Don't forget to set a password with ‘passwd’.
-	  users.users.junin = {
-    isNormalUser = true;
-    description = "Junin";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-      "libvirt"
-			"video"
-			"audio"
-      #"vboxusers"
-    ];
-    packages = with pkgs; [
-      kdePackages.kate
-    ];
-    shell = pkgs.zsh;
-  };
-
-  programs.zsh.enable = true;
-
-  nix = {
-    settings = {
-      auto-optimise-store = true;
-      experimental-features = ["nix-command" "flakes"];
+    # Define a user account. Don't forget to set a password with ‘passwd’.
+    users.users.junin = {
+        isNormalUser = true;
+        description = "Junin";
+        extraGroups = [
+            "networkmanager"
+            "wheel"
+            "libvirt"
+            "video"
+            "audio"
+            #"vboxusers"
+        ];
+        packages = with pkgs; [
+            kdePackages.kate
+        ];
+        shell = pkgs.zsh;
     };
 
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
-    };
+    programs.zsh.enable = true;
 
-  };
+    nix = {
+        settings = {
+            auto-optimise-store = true;
+            experimental-features = ["nix-command" "flakes"];
+        };
+
+        gc = {
+            automatic = true;
+            dates = "weekly";
+            options = "--delete-older-than 7d";
+        };
+
+    };
 
 
 
