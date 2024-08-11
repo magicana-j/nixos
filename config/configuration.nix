@@ -24,6 +24,42 @@
             ./virtualisation.nix
         ];
 
+	  # Define a user account. Don't forget to set a password with ‘passwd’.
+	  users.users.junin = {
+    isNormalUser = true;
+    description = "Junin";
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "libvirt"
+			"video"
+			"audio"
+      #"vboxusers"
+    ];
+    packages = with pkgs; [
+      kdePackages.kate
+    ];
+    shell = pkgs.zsh;
+  };
+
+  programs.zsh.enable = true;
+
+  nix = {
+    settings = {
+      auto-optimise-store = true;
+      experimental-features = ["nix-command" "flakes"];
+    };
+
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+
+  };
+
+
+
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
     # on your system were taken. It‘s perfectly fine and recommended to leave
