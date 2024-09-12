@@ -38,7 +38,8 @@
             ipafont
             ipaexfont
             source-code-pro
-            source-han-code-jp
+						migmix
+						migu
             nerdfonts
             fira-code
         ];
@@ -48,7 +49,7 @@
             defaultFonts = {
                 serif = ["TakaoPMincho" "Noto Color Emoji"];
                 sansSerif = ["TakaoPGothic" "Noto Color Emoji"];
-                monospace = ["Source Han Code JP" "Noto Color Emoji"];
+                monospace = ["IPAfont" "Noto Color Emoji"];
                 emoji = ["Noto Color Emoji"];
             };
         };
