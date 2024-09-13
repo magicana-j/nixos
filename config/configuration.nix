@@ -13,11 +13,11 @@
             ./sound-pipewire.nix
             ./services.nix
             ./network.nix
-            ./i18n.nix
+            ./fonts.nix
+            ./ime.nix
+            ./locale.nix
             ./firewall.nix
             ./bluetooth.nix
-            ./mate.nix
-            #./env.nix
             ./flatpak.nix
             ./programs.nix
             ./steam.nix
