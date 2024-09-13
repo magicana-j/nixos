@@ -8,6 +8,7 @@
     imports =
         [ # Include the results of the hardware scan.
             ./hardware-configuration.nix
+            ./intel.nix
             ./bootloader.nix
             ./devices.nix
             ./sound-pipewire.nix
