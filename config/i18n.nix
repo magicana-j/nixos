@@ -38,8 +38,7 @@
             ipafont
             ipaexfont
             source-code-pro
-						migmix
-						migu
+	    migmix
             nerdfonts
             fira-code
         ];
