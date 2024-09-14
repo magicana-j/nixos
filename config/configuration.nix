@@ -41,7 +41,21 @@
         shell = pkgs.zsh;
     };
 
-    programs.zsh.enable = true;
+    programs.zsh = {
+        enable = true;
+        enableCompletion = true;
+        autosuggestions.enable = true;
+        syntaxHighlighting.enable = true;
+
+        shellAliases = {
+            ll = "ls -l";
+            la = "ls -la";
+            update = "sudo nixos-rebuild switch";
+            upgrade = "sudo nixos-rebuild switch --upgrade";
+        };
+
+        histSize = 10000;
+    };
 
     nix = {
         settings = {

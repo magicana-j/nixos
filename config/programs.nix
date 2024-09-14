@@ -22,14 +22,21 @@
         lm_sensors
         # Editor
         kdePackages.kate
+        # Office
+        libreoffice-fresh
 #        networkmanagerapplet
+    ] ++ (if (config.services.xserver.desktopManager.gnome.enable == true) then
+        [
+            dconf
+	    gnome.gnome-tweaks
+	    gnome.gnome-software
+	    gnomeExtensions.astra-monitor
+	    gnomeExtensions.wayland-or-x11
+	    gnomeExtensions.applications-menu
+	    gnomeExtensions.kimpanel
+        ] else []
+    );
 	#Gnome
-	gnome.gnome-tweaks
-	gnomeExtensions.astra-monitor
-	gnomeExtensions.wayland-or-x11
-	gnomeExtensions.applications-menu
-	gnomeExtensions.kimpanel
-    ];
 #    environment.systemPackages = with pkgs.gnomeExtensions; [
 #        wayland-or-X11
 #        applications-menu
