@@ -9,7 +9,7 @@
     # $ nix search wget
     environment.systemPackages = with pkgs; [
         vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-        wget curl git neofetch p7zip
+        htop wget curl git neofetch p7zip
         gnome.gnome-keyring
         # Development
         gcc cmake go python3Full jdk
@@ -19,10 +19,22 @@
         gimp shotwell
         # Utilities
         isoimagewriter
+        lm_sensors
         # Editor
         kdePackages.kate
 #        networkmanagerapplet
+	#Gnome
+	gnome.gnome-tweaks
+	gnomeExtensions.astra-monitor
+	gnomeExtensions.wayland-or-x11
+	gnomeExtensions.applications-menu
+	gnomeExtensions.kimpanel
     ];
+#    environment.systemPackages = with pkgs.gnomeExtensions; [
+#        wayland-or-X11
+#        applications-menu
+#        kimpanel
+#    ];
 
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.

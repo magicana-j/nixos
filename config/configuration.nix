@@ -15,6 +15,7 @@
             ./services.nix
             ./network.nix
             ./fonts.nix
+            ./gnome.nix
             ./ime.nix
             ./locale.nix
             ./firewall.nix
@@ -28,7 +29,7 @@
     # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.junin = {
         isNormalUser = true;
-        description = "Junin";
+        description = "Junin Krishna";
         extraGroups = [
             "networkmanager"
             "wheel"
@@ -36,9 +37,6 @@
             "video"
             "audio"
             #"vboxusers"
-        ];
-        packages = with pkgs; [
-            kdePackages.kate
         ];
         shell = pkgs.zsh;
     };
