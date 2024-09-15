@@ -1,4 +1,5 @@
 {config, pkgs, ... }:
+
 {
   home = rec {
     username = "junin";
@@ -12,8 +13,8 @@
     python312
     discord
     discord-ptb
-    gnome.totem
-    gnome.evince
+#    gnome.totem
+#    gnome.evince
     parsec-bin
     remmina
     slack
