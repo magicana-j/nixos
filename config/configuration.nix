@@ -16,6 +16,7 @@
             ./network.nix
             ./fonts.nix
             ./gnome.nix
+            ./lxqt.nix
             ./ime.nix
             ./locale.nix
             ./firewall.nix
