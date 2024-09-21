@@ -21,6 +21,7 @@
         # Utilities
         isoimagewriter
         lm_sensors
+				gparted
 
         # Editor
         kdePackages.kate
