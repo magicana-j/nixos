@@ -11,6 +11,7 @@
         vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
         htop wget curl git neofetch p7zip
         gnome.gnome-keyring
+				google-chrome
 
         # Audio
         easyeffects
@@ -81,8 +82,8 @@
         nix-direnv.enable = true;
     };
 
-    programs.starship = {
-        enable = true;
-    };
+#    programs.starship = {
+#        enable = true;
+#    };
 
 }
