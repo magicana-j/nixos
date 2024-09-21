@@ -6,7 +6,10 @@
     homeDirectory = "/home/${username}";
     stateVersion = "24.05";
   };
+
   programs.home-manager.enable = true;
+
+  nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
     gcc go nodejs-slim nodePackages.wrangler
