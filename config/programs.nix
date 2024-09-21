@@ -11,7 +11,7 @@
         vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
         htop wget curl git neofetch p7zip
         gnome.gnome-keyring
-				google-chrome
+        google-chrome
 
         # Audio
         easyeffects
@@ -22,7 +22,7 @@
         # Utilities
         isoimagewriter
         lm_sensors
-				gparted
+        gparted
 
         # Editor
         kdePackages.kate
