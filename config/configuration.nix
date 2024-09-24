@@ -48,7 +48,8 @@
         syntaxHighlighting.enable = true;
 
         shellAliases = {
-            ll = "ls -l";
+            ls = "ls -F --color=auto"
+            ll = "ls -lh";
             la = "ls -la";
             update = "sudo nixos-rebuild switch";
             upgrade = "sudo nixos-rebuild switch --upgrade";
