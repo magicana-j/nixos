@@ -9,7 +9,7 @@
     # $ nix search wget
     environment.systemPackages = with pkgs; [
         vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-        htop wget curl git neofetch p7zip
+        htop wget curl git neofetch fastfetch xarchiver p7zip
         gnome.gnome-keyring
         google-chrome
 
@@ -17,7 +17,7 @@
         easyeffects
 
         # Graphics
-        gimp shotwell
+        gimp shotwell inkscape
 
         # Utilities
         isoimagewriter
