@@ -21,6 +21,11 @@
     # Graphics
     gimp shotwell inkscape
 
+    # Video
+    vokoscreen-ng
+    obs-studio
+    easyeffects
+
     # Utilities
     isoimagewriter
     lm_sensors
