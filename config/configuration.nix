@@ -5,81 +5,83 @@
 { config, pkgs, ... }:
 
 {
-    imports =
-        [ # Include the results of the hardware scan.
-            ./hardware-configuration.nix
-            ./intel.nix
-            ./bootloader.nix
-            ./devices.nix
-            ./sound-pipewire.nix
-            ./services.nix
-            ./network.nix
-            ./fonts.nix
-            ./gnome.nix
-            ./ime.nix
-            ./locale.nix
-            ./firewall.nix
-            ./bluetooth.nix
-            ./flatpak.nix
-            ./programs.nix
-            ./steam.nix
-            ./virtualisation.nix
-        ];
+  imports =
+    [ # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+      ./intel.nix
+      ./bootloader.nix
+      ./devices.nix
+      ./sound-pipewire.nix
+      ./services.nix
+      ./network.nix
+      ./fonts.nix
+      ./gnome.nix
+      ./ime.nix
+      ./locale.nix
+      ./firewall.nix
+      ./bluetooth.nix
+      ./flatpak.nix
+      ./systempackages.nix
+      ./programs.nix
+      ./steam.nix
+      ./virtualisation.nix
+      ./_1password.nix
+    ];
 
-    # Define a user account. Don't forget to set a password with ‘passwd’.
-    users.users.junin = {
-        isNormalUser = true;
-        description = "Junin Krishna";
-        extraGroups = [
-            "networkmanager"
-            "wheel"
-            "libvirt"
-            "video"
-            "audio"
-            #"vboxusers"
-        ];
-        shell = pkgs.zsh;
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.junin = {
+    isNormalUser = true;
+    description = "Junin Krishna";
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "libvirt"
+      "video"
+      "audio"
+      #"vboxusers"
+    ];
+    shell = pkgs.zsh;
+  };
+
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+
+    shellAliases = {
+      ls = "ls -F --color=auto"
+      ll = "ls -lh";
+      la = "ls -la";
+      update = "sudo nixos-rebuild switch";
+      upgrade = "sudo nixos-rebuild switch --upgrade";
     };
 
-    programs.zsh = {
-        enable = true;
-        enableCompletion = true;
-        autosuggestions.enable = true;
-        syntaxHighlighting.enable = true;
+    histSize = 10000;
+  };
 
-        shellAliases = {
-            ls = "ls -F --color=auto"
-            ll = "ls -lh";
-            la = "ls -la";
-            update = "sudo nixos-rebuild switch";
-            upgrade = "sudo nixos-rebuild switch --upgrade";
-        };
-
-        histSize = 10000;
+  nix = {
+    settings = {
+      auto-optimise-store = true;
+      experimental-features = ["nix-command" "flakes"];
     };
 
-    nix = {
-        settings = {
-            auto-optimise-store = true;
-            experimental-features = ["nix-command" "flakes"];
-        };
-
-        gc = {
-            automatic = true;
-            dates = "weekly";
-            options = "--delete-older-than 7d";
-        };
-
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
     };
 
+  };
 
 
-    # This value determines the NixOS release from which the default
-    # settings for stateful data, like file locations and database versions
-    # on your system were taken. It‘s perfectly fine and recommended to leave
-    # this value at the release version of the first install of this system.
-    # Before changing this value read the documentation for this option
-    # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-    system.stateVersion = "24.05"; # Did you read the comment?
+
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "24.05"; # Did you read the comment?
 
 }
