@@ -12,6 +12,12 @@
     gnome.gnome-keyring
     google-chrome
 
+    # Video
+    vokoscreen
+    shotcut
+    vlc
+    obs-studio
+
     # Audio
     easyeffects
 
