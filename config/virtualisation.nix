@@ -4,11 +4,13 @@
 
   virtualisation.podman = {
     enable = true;
-    #networkSocket.enable = true;
+    dockerSocket.enable = true;
+    dockerCompat = true;
     extraPackages = with pkgs; [
       dive
       podman-tui
-      docker-compose
+      podman-compose
+      podman-desktop
     ];
   };
 
