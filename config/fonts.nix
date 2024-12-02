@@ -14,7 +14,7 @@
       source-code-pro
       migmix
       nerdfonts
-      fira-code
+      udev-gothic-nf
     ];
 
     fontDir.enable = true;
