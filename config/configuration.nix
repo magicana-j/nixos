@@ -23,9 +23,9 @@
       ./flatpak.nix
       ./systempackages.nix
       ./programs.nix
-      ./steam.nix
-      ./virtualisation.nix
-      ./_1password.nix
+      #./steam.nix
+      #./virtualisation.nix
+      #./_1password.nix
     ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
