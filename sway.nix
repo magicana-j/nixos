@@ -7,8 +7,6 @@
     # You can disable this if you're only using the Wayland session.
     services.xserver.enable = true;
 
-    services.gnome.gnome-keyring.enable = true;
-
     programs.sway = {
         enable = true;
         wrapperFeatures.gtk = true;
