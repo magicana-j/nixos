@@ -13,31 +13,39 @@
     gnome.gnome-keyring
     google-chrome
 
-    python312 go
-
     # Audio
-    easyeffects
+    audacity
+    # easyeffects
 
     # Graphics
     gimp shotwell inkscape
 
     # Video
-    vokoscreen-ng
     obs-studio
-    easyeffects
+    handbrake
+    kazam
+    vlc
 
     # Utilities
     isoimagewriter
     lm_sensors
     gparted
-
-    # Editor
-    kdePackages.kate
+    unetbootin
+    ventoy-full
 
     # Office
     libreoffice-fresh
 
+    # Development
+    podman
+    podman-compose
+    podman-desktop
+
+    # System
+    gnome-boxes
+
     # Gnome
-    dconf
-    gnome.gnome-tweaks
+    # dconf
+    # gnome.gnome-tweaks
   ];
+}
