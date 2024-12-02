@@ -9,8 +9,6 @@
       #noto-fonts-cjk-sans
       noto-fonts-emoji
       takao
-      ipafont
-      ipaexfont
       source-code-pro
       migmix
       nerdfonts
