@@ -38,26 +38,34 @@
       "libvirt"
       "video"
       "audio"
-      #"vboxusers"
     ];
   };
 
-  programs.zsh = {
+  programs.bash = {
     enable = true;
-    enableCompletion = true;
-    autosuggestions.enable = true;
-    syntaxHighlighting.enable = true;
-
+    completion.enable = true;
+    enableLsColors = true;
     shellAliases = {
       ls = "ls -F --color=auto"
       ll = "ls -lh";
       la = "ls -la";
-      update = "sudo nixos-rebuild switch";
-      upgrade = "sudo nixos-rebuild switch --upgrade";
     };
-
-    histSize = 10000;
   };
+
+#  programs.zsh = {
+#    enable = true;
+#    enableCompletion = true;
+#    autosuggestions.enable = true;
+#    syntaxHighlighting.enable = true;
+#
+#    shellAliases = {
+#      ls = "ls -F --color=auto"
+#      ll = "ls -lh";
+#      la = "ls -la";
+#    };
+#
+#    histSize = 10000;
+#  };
 
   nix = {
     settings = {
