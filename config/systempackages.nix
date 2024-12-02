@@ -10,7 +10,7 @@
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     ntfs3g htop wget curl git neofetch fastfetch xarchiver p7zip
-    gnome.gnome-keyring
+
     google-chrome
 
     # Audio
@@ -35,11 +35,6 @@
 
     # Office
     libreoffice-fresh
-
-    # Development
-    podman
-    podman-compose
-    podman-desktop
 
     # System
     gnome-boxes
