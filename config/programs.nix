@@ -14,12 +14,13 @@
 
     # Video
     vokoscreen
+    kazam
     shotcut
     vlc
     obs-studio
 
     # Audio
-    easyeffects
+    # easyeffects
 
     # Graphics
     gimp shotwell inkscape
@@ -30,14 +31,14 @@
     gparted
 
     # Editor
-    kdePackages.kate
+    # kdePackages.kate
 
     # Office
-    libreoffice-fresh
+    # libreoffice-fresh
 
     # Gnome
-    dconf
-    gnome.gnome-tweaks
+    # dconf
+    # gnome.gnome-tweaks
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
