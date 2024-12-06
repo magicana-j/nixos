@@ -11,12 +11,12 @@
       ./intel.nix
       ./bootloader.nix
       ./devices.nix
+      ./cinnamon.nix
       ./sound-pipewire.nix
       ./services.nix
       ./network.nix
       ./fonts.nix
-      ./gnome.nix
-      ./ime.nix
+      ./fcitx5.nix
       ./locale.nix
       ./firewall.nix
       ./bluetooth.nix
@@ -42,14 +42,14 @@
   };
 
   programs.bash = {
-    enable = true;
+#    enable = true;
     completion.enable = true;
     enableLsColors = true;
-    shellAliases = {
-      ls = "ls -F --color=auto"
-      ll = "ls -lh";
-      la = "ls -la";
-    };
+#    shellAliases = {
+#      ls = "ls -F --color=auto"
+#      ll = "ls -lh";
+#      la = "ls -la";
+#    };
   };
 
 #  programs.zsh = {
