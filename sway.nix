@@ -25,7 +25,7 @@
     };
 
     programs.waybar.enable = true;
-    programs.qt5ct.enable = true;
+    #programs.qt5ct.enable = true;
     hardware.opengl.dripSupport32Bit = true;
 
     systemd.user.services.kanshi = {
