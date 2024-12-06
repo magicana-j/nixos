@@ -2,10 +2,12 @@
 
 {
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
+
     extraPackages = with pkgs; [
-      onevpl-intel-gpu
+      #onevpl-intel-gpu
+      vpl-gpu-rt
       mesa
       intel-media-driver
       intel-media-sdk

@@ -23,7 +23,7 @@
       ./flatpak.nix
       ./systempackages.nix
       ./programs.nix
-      #./steam.nix
+      ./steam.nix
       #./virtualisation.nix
       #./_1password.nix
     ];
@@ -80,7 +80,6 @@
     };
 
   };
-
 
 
   # This value determines the NixOS release from which the default
