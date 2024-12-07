@@ -24,7 +24,7 @@
       ./systempackages.nix
       ./programs.nix
       ./steam.nix
-      #./virtualisation.nix
+      ./virtualisation.nix
       #./_1password.nix
     ];
 
