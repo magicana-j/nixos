@@ -37,7 +37,7 @@
     libreoffice-fresh
 
     # System
-    gnome-boxes
+    #gnome-boxes
 
     # Gnome
     # dconf
