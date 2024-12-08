@@ -29,9 +29,9 @@
     ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.amuharai = {
+  users.users.user = {
     isNormalUser = true;
-    description = "Amuharai";
+    description = "USER";
     extraGroups = [
       "networkmanager"
       "wheel"
