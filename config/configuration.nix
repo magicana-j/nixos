@@ -8,7 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./intel.nix
+      ./graphics.nix
       ./bootloader.nix
       ./devices.nix
       ./cinnamon.nix
