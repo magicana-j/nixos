@@ -95,11 +95,13 @@
   users.users.amuharai = {
     isNormalUser = true;
     description = "Amuharai";
+    shell = pkgs.zsh;
     extraGroups = [
       "networkmanager"
       "wheel"
       "video"
       "audio"
+      "libvirt"
     ];
   };
 
@@ -164,11 +166,6 @@
 #    enable = true;
 #    completion.enable = true;
 #    enableLsColors = true;
-#    shellAliases = {
-#      ls = "ls -F --color=auto"
-#      ll = "ls -lh";
-#      la = "ls -la";
-#    };
 #  };
 
   programs.zsh = {
@@ -196,6 +193,7 @@
 
   services.xserver.enable = true;
   services.xserver.displayManager.lightdm.enable = true;
+  #services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.cinnamon.enable = true;
 
 
@@ -226,7 +224,6 @@
     # Video
     obs-studio
     handbrake
-    kazam
     vlc
 
     # Utilities
@@ -236,11 +233,15 @@
     unetbootin
     ventoy-full
 
+    # Development
+    gcc cmake go rustc rustfmt cargo ghc stack
+    jdk nodejs_23 python3Full
+
     # Office
     libreoffice-fresh
 
     # System
-    #gnome-boxes
+    gnome-boxes
 
     # Gnome
     # dconf
@@ -296,6 +297,37 @@ endif
 #    programs.starship = {
 #        enable = true;
 #    };
+
+
+  virtualisation.podman = {
+    enable = true;
+    dockerSocket.enable = true;
+    dockerCompat = true;
+    extraPackages = with pkgs; [
+      dive
+      podman-tui
+      podman-compose
+      podman-desktop
+    ];
+  };
+
+#  virtualisation.libvirtd = {
+#    qemu = {
+#      package = pkgs.qemu_kvm;
+#      runAsRoot = true;
+#      swtpm.enable = true;
+#      ovmf = {
+#        enable = true;
+#        packages = [(pkgs.OVMF.override {
+#          secureBoot = true;
+#          tpmSupport = true;
+#        }).fd];
+#      };
+#    };
+#  };
+#
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
 
 
   # This value determines the NixOS release from which the default
