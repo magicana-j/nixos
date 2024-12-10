@@ -234,8 +234,8 @@
     ventoy-full
 
     # Development
-    gcc cmake go rustc rustfmt cargo ghc stack
-    jdk nodejs_23 python3Full
+    #gcc cmake go rustc rustfmt cargo ghc stack
+    #jdk nodejs_23 python3Full
 
     # Office
     libreoffice-fresh
