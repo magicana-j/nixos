@@ -11,6 +11,7 @@
         enable = true;
         wrapperFeatures.gtk = true;
         extraPackages = with pkgs; [
+            waybar
             swaylock swayidle wl-clipboard wf-recorder
             mako grim slurp alacritty rofi wofi
             networkmanagerapplet
