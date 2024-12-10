@@ -242,6 +242,7 @@
 
     # System
     gnome-boxes
+    gnome-software
 
     # Gnome
     # dconf
@@ -306,8 +307,8 @@ endif
     extraPackages = with pkgs; [
       dive
       podman-tui
-      podman-compose
-      podman-desktop
+      #podman-compose
+      #podman-desktop
     ];
   };
 
