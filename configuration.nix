@@ -215,15 +215,15 @@
     google-chrome
 
     # Audio
-    audacity
-    # easyeffects
+    #audacity
+    #easyeffects
 
     # Graphics
-    gimp shotwell inkscape
+    gimp inkscape
 
     # Video
-    obs-studio
-    handbrake
+    #obs-studio
+    #handbrake
     vlc
 
     # Utilities
@@ -260,12 +260,12 @@
   programs.firefox.enable = true;
 
   programs.nano.nanorc = ''
-set softwrap
-set linenumbers
-set autoindent
-set tabtospaces
-set tabsize 2
-'';
+    set softwrap
+    set linenumbers
+    set autoindent
+    set tabtospaces
+    set tabsize 2
+  '';
 
   programs.neovim = {
     enable = true;
@@ -295,9 +295,9 @@ endif
     nix-direnv.enable = true;
   };
 
-#    programs.starship = {
-#        enable = true;
-#    };
+  programs.starship = {
+    enable = true;
+  };
 
 
   virtualisation.podman = {
@@ -307,26 +307,26 @@ endif
     extraPackages = with pkgs; [
       dive
       podman-tui
-      #podman-compose
+      podman-compose
       #podman-desktop
     ];
   };
 
-#  virtualisation.libvirtd = {
-#    qemu = {
-#      package = pkgs.qemu_kvm;
-#      runAsRoot = true;
-#      swtpm.enable = true;
-#      ovmf = {
-#        enable = true;
-#        packages = [(pkgs.OVMF.override {
-#          secureBoot = true;
-#          tpmSupport = true;
-#        }).fd];
-#      };
-#    };
-#  };
-#
+  virtualisation.libvirtd = {
+    qemu = {
+      package = pkgs.qemu_kvm;
+      runAsRoot = true;
+      swtpm.enable = true;
+      ovmf = {
+        enable = true;
+        packages = [(pkgs.OVMF.override {
+          secureBoot = true;
+          tpmSupport = true;
+        }).fd];
+      };
+    };
+  };
+
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
 
