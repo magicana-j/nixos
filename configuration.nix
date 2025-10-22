@@ -17,10 +17,8 @@
     ./modules/packages.nix
     ./modules/programs.nix
     ./modules/ssh.nix
-#    ./modules/git.nix
-#    ./modules/flatpak.nix
-    ./modules/tor.nix
-    ./modules/virtualization.nix
+#    ./modules/tor.nix
+    ./modules/podman.nix
     ./modules/nix-settings.nix
   ];
 
